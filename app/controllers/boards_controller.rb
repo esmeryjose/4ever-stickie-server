@@ -16,8 +16,8 @@ class BoardsController < ApplicationController
   end
 
   def update
-    board = Board.update(board_params)
-    render json: board
+    @board = Board.update(board_params)
+    render json: @board
   end
 
   private
@@ -27,6 +27,6 @@ class BoardsController < ApplicationController
   end
 
   def set_board
-    board = Board.find_by(id: params[:board][:id])
+    @board = Board.find_by(id: params[:id])
   end
 end
