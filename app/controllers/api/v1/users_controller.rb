@@ -1,4 +1,4 @@
-class UsersController < ApplicationController
+class api::v1::Api::V1::UsersController < ApplicationController
   before_action :set_user, only:[:update, :show]
 
   def create

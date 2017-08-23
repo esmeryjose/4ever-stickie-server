@@ -1,4 +1,4 @@
-class BoardsController < ApplicationController
+class Api::V1::BoardsController < ApplicationController
   before_action :set_board, only:[:show,:update]
 
   def index
