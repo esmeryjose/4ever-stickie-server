@@ -1,9 +1,11 @@
 class Api::V1::UsersController < ApplicationController
   before_action :set_user, only:[:update, :show]
+  skip_before_action :authorized, only: [:create]
 
   def create
     user = User.create(user_params)
-    render json: user
+    user_with_token(user)
+    render json: user_with_token(user)
   end
 
   def show
