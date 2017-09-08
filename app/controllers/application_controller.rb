@@ -4,13 +4,13 @@ class ApplicationController < ActionController::API
 
  private
   def issue_token(payload)
-    JWT.encode(payload, ENV["some_secret"])
+    JWT.encode(payload, ENV["SOME_SECRET"])
   end
 
   def current_user
     authenticate_or_request_with_http_token do |jwt_token, options|
       begin
-        decoded_token = JWT.decode(jwt_token, ENV["some_secret"])
+        decoded_token = JWT.decode(jwt_token, ENV["SOME_SECRET"])
       rescue JWT::DecodeError
         return nil
       end
