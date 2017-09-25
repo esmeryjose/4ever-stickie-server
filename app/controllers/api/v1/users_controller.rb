@@ -1,20 +1,15 @@
 class Api::V1::UsersController < ApplicationController
-  before_action :set_user, only:[:update, :show]
+  before_action :set_user, only:[:update]
   skip_before_action :authorized, only: [:create]
 
   def create
     user = User.create(user_params)
-    user_with_token(user)
-    render json: user_with_token(user)
-  end
-
-  def show
-    render json: @user
+    now_render(user)
   end
 
   def update
-    @user = User.update(user_params)
-    render json: @user
+    @user.update(user_params)
+    now_render(@user)
   end
 
   private

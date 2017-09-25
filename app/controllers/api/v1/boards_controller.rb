@@ -2,22 +2,23 @@ class Api::V1::BoardsController < ApplicationController
   before_action :set_board, only:[:show,:update]
 
   def index
-    boards = Board.all
+    id = current_user_id
+    boards = Board.my_boards(id).most_recent
     render json: boards
   end
 
   def create
     board = Board.create(board_params)
-    render json: board
+    now_render(board)
   end
 
   def show
-    render json: board
+    render json: @board
   end
 
   def update
-    @board = Board.update(board_params)
-    render json: @board
+    @board.update(board_params)
+    now_render(@board)
   end
 
   private

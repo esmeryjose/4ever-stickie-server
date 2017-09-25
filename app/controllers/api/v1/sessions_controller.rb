@@ -6,12 +6,13 @@ class Api::V1::SessionsController < ApplicationController
   end
 
   def create
+    response = nil
     user = User.find_by(username: params[:username])
-    if user && user.authenticate(params[:password])
-      render json: user_with_token(user)
-    else
-      render json: { error: "You have enter the wrong username or password"}
-    end
+    user && user.authenticate(params[:password]) ?
+      response = user_with_token(user) :
+      response = { error: "You have enter the wrong username or password"}
+
+    render json: response
   end
 
 end

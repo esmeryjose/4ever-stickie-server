@@ -1,19 +1,14 @@
 class Api::V1::NotesController < ApplicationController
   before_action :set_note, only:[:update]
 
-  def index
-    notes = Note.all
-    render json: notes
-  end
-
   def create
     note = Note.create(note_params)
-    render json: note
+    now_render(note)
   end
 
   def update
     @note.update(note_params)
-    render json: @note
+    now_render(@note)
   end
 
   private
@@ -25,4 +20,5 @@ class Api::V1::NotesController < ApplicationController
   def set_note
     @note = Note.find_by(id: params[:id])
   end
+
 end
